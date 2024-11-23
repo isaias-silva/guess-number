@@ -3,13 +3,13 @@ use std::{cmp::Ordering, io};
 use rand::{self, Rng};
 
 fn main() {
-    
+   
     let secret_number = rand::thread_rng().gen_range(1, 1001);
-    let mut lifes=3;
+    let mut lifes = 3;
     println!("wellcome to game 'what's number?'\n you have {lifes} attemps for to hit the secret number!");
     loop {
-        if lifes<=0 {
-           print!("GAME OVER");
+        if lifes <= 0 {
+            print!("GAME OVER!\n the secret number is {secret_number}");
             break;
         }
         println!("what's your guess?");
@@ -20,18 +20,20 @@ fn main() {
 
         println!("your guess is {guess} ");
 
-        let guess: u32 = match guess.trim().parse(){
-            Ok(num)=>num,
-            Err(_)=>continue,
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
         };
 
         match guess.cmp(&secret_number) {
             Ordering::Less => {
-                lifes-=1;
-                println!("lot small!")},
-            Ordering::Greater =>{ 
-                lifes-=1;
-                println!("lot tall!")},
+                lifes -= 1;
+                println!("lot small!")
+            }
+            Ordering::Greater => {
+                lifes -= 1;
+                println!("lot tall!")
+            }
             Ordering::Equal => {
                 println!("YEAAAH you're right! the number is {secret_number}!");
                 break;
@@ -39,4 +41,6 @@ fn main() {
         }
         println!("you have only {lifes} attemps!")
     }
+
 }
+
